@@ -55,24 +55,25 @@ def check_plagiarism(texts_and_vs):
     sorted_results= sorted(results, key=lambda tup: tup[2], reverse= True)
     return sorted_results
 
-t = threading.Thread(target=animate)
-t.start()
+if main == '__main__':
+    t = threading.Thread(target=animate)
+    t.start()
 
 
-#path to files
-path= "britney_lyrics/"
+    #path to files
+    path= "britney_lyrics/"
 
-#get a list of all the texts in the directory
-text_names = [doc for doc in os.listdir(path) if doc.endswith('.txt')]
-#store the text files' contents
-text_contents = [open(os.path.join(path, File)).read() for File in text_names]
-#vectorize the texts' contents
-vectorized_txts = vectorize(text_contents)
-# join texts and their vectorized contents
-textname_and_vectors = list(zip(text_names, vectorized_txts))
+    #get a list of all the texts in the directory
+    text_names = [doc for doc in os.listdir(path) if doc.endswith('.txt')]
+    #store the text files' contents
+    text_contents = [open(os.path.join(path, File)).read() for File in text_names]
+    #vectorize the texts' contents
+    vectorized_txts = vectorize(text_contents)
+    # join texts and their vectorized contents
+    textname_and_vectors = list(zip(text_names, vectorized_txts))
 
-#print plagiarism levels
-print()
-for results in check_plagiarism(textname_and_vectors):
-    print(results[0], "and",results[1],"are:", results[2], "% similar")
-done = True
+    #print plagiarism levels
+    print()
+    for results in check_plagiarism(textname_and_vectors):
+        print(results[0], "and",results[1],"are:", results[2], "% similar")
+    done = True
