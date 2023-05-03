@@ -55,7 +55,7 @@ def check_plagiarism(texts_and_vs):
     sorted_results= sorted(results, key=lambda tup: tup[2], reverse= True)
     return sorted_results
 
-if main == '__main__':
+if __name__ == '__main__':
     t = threading.Thread(target=animate)
     t.start()
 
