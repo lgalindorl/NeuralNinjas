@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+  	<style>
+  		.col{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.row{
+  flex-direction: row;
+}
+
+img{
+  width: 10%;
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+
+  	</style>
+    <header class="container">
+        <hgroup>
+          <h1>ITESM plagiarism Checker</h1>
+          <h2>Submit the student's work before grading, the system will compare all of the files and highlight plagiarism.</h2>
+        </hgroup> 
+      </header>
+   
+    <div class="col">
+      
+      <div class="row">
+        <p>Submit one or more Text files.</p>
+      </div>
+      
+      <div class="row">
+        <form action="/" enctype=multipart/form-data method="POST">
+          <input type="file">
+          <input type="submit">
+        </form>
+      </div>
+    </div>
+    <footer>
+      <small>Built by <a href="#">Neural Ninjas</a> •
+        <a href="https://github.com/lgalindorl/NeuralNinjas">Source code</a></small>
+    </footer>
+  </body>
+</html>
