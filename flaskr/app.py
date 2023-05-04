@@ -4,7 +4,6 @@ from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = '/files'
 
-
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 
@@ -25,7 +24,7 @@ def index():
         
         if file:
             filename = secure_filename(file.filename)
-            file.save(os.path.join(pp.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('results', name=filename))
 
     return render_template('submit.html')
