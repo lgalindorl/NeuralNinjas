@@ -1,6 +1,3 @@
-from flask import Flask,  request, render_template, redirect, url_for, flash
-import os
-from werkzeug.utils import secure_filename
 import os
 from numpy import vectorize
 from numpy import round as rd
@@ -10,11 +7,6 @@ import itertools
 import threading
 import time
 import sys
-
-UPLOAD_FOLDER = 'files/'
-
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER 
 
 done = False
 
@@ -44,7 +36,7 @@ def check_plagiarism(texts_and_vs):
     #iterate through text and vectorized contents list
     for sample_a, text_vector_a in texts_and_vs:
         #copy textnames and vectorized content list
-        vectors_cp= texts_and_vs.copy()
+        vectors_cp= textname_and_vectors.copy()
         #get index of 
         current_index = vectors_cp.index((sample_a, text_vector_a))
         #deletes the current index from copied list so it doesn't compare with itself
@@ -63,33 +55,14 @@ def check_plagiarism(texts_and_vs):
     sorted_results= sorted(results, key=lambda tup: tup[2], reverse= True)
     return sorted_results
 
-#upload files and serve base file
-@app.route("/", methods=["GET", "POST"])
-def index():
-    if request.method == "POST":
-        if 'file' not in request.files:
-            print("file not in request.files")
-            return render_template('submit.html')
-            
-        file = request.files['file']
+if __name__ == '__main__':
+    t = threading.Thread(target=animate)
+    t.start()
 
-        if file.filename == "":
-            print("file has no name")
-            return render_template('submit.html')
-        
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('results', name=filename))
 
-    return render_template('submit.html')
+    #path to files
+    path= "britney_lyrics/"
 
-#serve results
-@app.route("/results", methods=["GET"])
-def results():
-    #run code
-    path="files/"
-    
     #get a list of all the texts in the directory
     text_names = [doc for doc in os.listdir(path) if doc.endswith('.txt')]
     #store the text files' contents
@@ -98,23 +71,9 @@ def results():
     vectorized_txts = vectorize(text_contents)
     # join texts and their vectorized contents
     textname_and_vectors = list(zip(text_names, vectorized_txts))
-    
-    results = check_plagiarism(textname_and_vectors)
 
-
-    #get results
-    text1_name = results[0][0]
-    percentage = results[0][2]
-    text2_name = results[0][1]
-
-    
-    #read both files
-    with open(path+text1_name, 'r') as file:
-        content1 = file.read()
-
-    with open(path+text2_name, 'r') as file:
-        content2 = file.read()
-
-    #pass results to front end
-    return render_template('result_page.html', text1_name=text1_name, percentage=percentage, text2_name=text2_name, text1 = content1, text2 = content2)
-
+    #print plagiarism levels
+    print()
+    for results in check_plagiarism(textname_and_vectors):
+        print(results[0], "and",results[1],"are:", results[2], "% similar")
+    done = True

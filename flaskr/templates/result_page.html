@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet"> 
+  </head>
+  <body>
+    <header class="container">
+        <hgroup>
+          <h1>ITESM plagiarism Checker</h1>
+          <h2>Submit the student's work before grading, the system will compare all of the files and highlight plagiarism.</h2>
+        </hgroup> 
+      </header>
+   
+    <div class="col">
+      
+      <div class="row">
+        <h1 style ="text-align: center;"">
+          {{text1_name}} is {{percentage}}% similar to {{text2_name}}
+        </h1 display:flex>
+        <div id="textareabox">
+          <textarea style="align-items:center" oninput="auto_grow(this)">{{text1}}</textarea>
+          <textarea style="align-items:center" oninput="auto_grow(this)">{{text2}}</textarea>
+          </div>
+      </div>
+    </div> 
+  
+    <footer>
+      <small>Built by <a href="#">Neural Ninjas</a> •
+        <a href="https://github.com/lgalindorl/NeuralNinjas">Source code</a></small>
+    </footer>
+  </body>
+  
+</html>
